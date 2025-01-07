@@ -12,7 +12,7 @@ DEFINE ACCESS OVERWRITE account
     FOR SESSION 4h
     FOR TOKEN 8h;
 
-DEFINE TABLE OVERWRITE user
+DEFINE TABLE OVERWRITE user SCHEMAFULL
   PERMISSIONS
     FOR select, update WHERE id = $auth
     FOR create, delete WHERE $auth.is_admin;
