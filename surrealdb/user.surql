@@ -15,11 +15,11 @@ DEFINE ACCESS OVERWRITE account
 DEFINE TABLE OVERWRITE user SCHEMAFULL
   PERMISSIONS
     FOR select, update WHERE id = $auth
-    FOR create, delete WHERE $auth.is_admin;
+    FOR select, create, update, delete WHERE $auth.is_admin;
 
 DEFINE FIELD OVERWRITE name ON TABLE user TYPE string;
 DEFINE FIELD OVERWRITE email ON TABLE user TYPE string ASSERT $value.is_email();
-DEFINE FIELD password_hash ON TABLE user TYPE string ASSERT $value.starts_with("$argon2");
+DEFINE FIELD OVERWRITE password_hash ON TABLE user TYPE string ASSERT $value.starts_with("$argon2");
 DEFINE FIELD OVERWRITE is_admin ON TABLE user TYPE bool DEFAULT false;
 DEFINE FIELD OVERWRITE language ON TABLE user TYPE "EnUS" | "EsCR" DEFAULT "EsCR";
 DEFINE FIELD OVERWRITE theme ON TABLE user TYPE "light" | "dark" DEFAULT "dark";
